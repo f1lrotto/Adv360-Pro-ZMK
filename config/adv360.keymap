@@ -11,19 +11,7 @@
       #include "version.dtsi"
       #ifndef VERSION_MACRO
 
-        macro_ver: macro_ver {
-            compatible = "zmk,behavior-macro";
-            label = "macro_version";
-            #binding-cells = <0>;
-            bindings = <&kp RET>;
-        };
 
-        shift_tab: shift_tab {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LEFT_SHIFT &kp TAB>;
-            label = "SHIFT_TAB";
-        };
 
         #endif
 
@@ -50,14 +38,6 @@
             bindings = <&kp TAB>;
             key-positions = <33 40>;
         };
-
-        shift_tab {
-            bindings = <&shift_tab>;
-            key-positions = <18 23>;
-        };
-    };
-
-    macros {
     };
 
     keymap {
