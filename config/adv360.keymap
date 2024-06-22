@@ -18,6 +18,13 @@
             bindings = <&kp RET>;
         };
 
+        shift_tab: shift_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_SHIFT &kp TAB>;
+            label = "SHIFT_TAB";
+        };
+
         #endif
 
         hm: homerow_mods {
@@ -37,6 +44,16 @@
         caps_word {
             bindings = <&caps_word>;
             key-positions = <58 47>;
+        };
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <33 40>;
+        };
+
+        shift_tab {
+            bindings = <&shift_tab>;
+            key-positions = <18 23>;
         };
     };
 
