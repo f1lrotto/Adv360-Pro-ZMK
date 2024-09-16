@@ -23,6 +23,37 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+
+        os_toggle: os_toggle {
+            compatible = "zmk,behavior-toggle-layer";
+            label = "OS_TOGGLE";
+            #binding-cells = <0>;
+            bindings = <&tog 6>;  // Toggle layer 6 (OS mode layer)
+        };
+
+        os_copy: os_copy {
+            compatible = "zmk,behavior-mod-morph";
+            label = "OS_COPY";
+            #binding-cells = <0>;
+            bindings = <&win_copy>, <&mac_copy>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+
+        os_cut: os_cut {
+            compatible = "zmk,behavior-mod-morph";
+            label = "OS_CUT";
+            #binding-cells = <0>;
+            bindings = <&win_cut>, <&mac_cut>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+
+        os_paste: os_paste {
+            compatible = "zmk,behavior-mod-morph";
+            label = "OS_PASTE";
+            #binding-cells = <0>;
+            bindings = <&win_paste>, <&mac_paste>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
     };
 
     combos {
@@ -40,25 +71,46 @@
     };
 
     macros {
-        cp_copy: cp_copy {
-            label = "ZM_cp_copy";
+        mac_copy: mac_copy {
+            label = "ZM_mac_copy";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LG(C)>, <&macro_tap>, <&kp LC(C)>;
+            bindings = <&macro_tap &kp LG(C)>;
         };
 
-        cp_cut: cp_cut {
-            label = "ZM_cp_cut";
+        mac_cut: mac_cut {
+            label = "ZM_mac_cut";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LG(X)>, <&macro_tap>, <&kp LC(X)>;
+            bindings = <&macro_tap &kp LG(X)>;
         };
 
-        cp_paste: cp_paste {
-            label = "ZM_cp_paste";
+        mac_paste: mac_paste {
+            label = "ZM_mac_paste";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LG(V)>, <&macro_tap>, <&kp LC(V)>;
+            bindings = <&macro_tap &kp LG(V)>;
+        };
+
+        win_copy: win_copy {
+            label = "ZM_win_copy";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp LC(C)>;
+        };
+
+        win_cut: win_cut {
+            label = "ZM_win_cut";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp LC(X)>;
+        };
+
+        win_paste: win_paste {
+            label = "ZM_win_paste";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp LC(V)>;
         };
     };
 
