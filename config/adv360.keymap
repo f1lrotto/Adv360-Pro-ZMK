@@ -25,10 +25,11 @@
         };
 
         os_toggle: os_toggle {
-            compatible = "zmk,behavior-toggle-layer";
+            compatible = "zmk,behavior-tap-dance";
             label = "OS_TOGGLE";
             #binding-cells = <0>;
-            bindings = <&tog 6>;  // Toggle layer 6 (OS mode layer)
+            tapping-term-ms = <200>;
+            bindings = <&tog 6>, <&tog 6>;
         };
 
         os_copy: os_copy {
