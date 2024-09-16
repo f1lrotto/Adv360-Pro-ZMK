@@ -39,6 +39,38 @@
         };
     };
 
+    macros {
+        cp_copy: cp_copy {
+            label = "ZM_cp_copy";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(C)>
+                , <&macro_tap &kp LC(C)>
+                ;
+        };
+    
+        cp_cut: cp_cut {
+            label = "ZM_cp_cut";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(X)>
+                , <&macro_tap &kp LC(X)>
+                ;
+        };
+    
+        cp_paste: cp_paste {
+            label = "ZM_cp_paste";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LG(V)>
+                , <&macro_tap &kp LC(V)>
+                ;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
