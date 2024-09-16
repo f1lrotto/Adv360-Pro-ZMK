@@ -7,11 +7,8 @@
 / {
     behaviors {
         #include "macros.dtsi"
-      #include "version.dtsi"
-      #ifndef VERSION_MACRO
-
-
-
+        #include "version.dtsi"
+        #ifndef VERSION_MACRO
         #endif
 
         hm: homerow_mods {
@@ -41,24 +38,30 @@
 
     macros {
         cp_copy: cp_copy {
-            label = "ZM_cp_copy";
+            label = "Cross-Platform Copy";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LG(C)>, <&macro_tap>, <&kp LC(C)>;
+            
+            // Check Bluetooth profile, Command+C for macOS (BT profile 0) and Ctrl+C for Windows
+            bindings = <&macro_tap>, (if (bt_active == 0)) <&kp LG(C)> else <&kp LC(C)>;
         };
 
         cp_cut: cp_cut {
-            label = "ZM_cp_cut";
+            label = "Cross-Platform Cut";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LG(X)>, <&macro_tap>, <&kp LC(X)>;
+            
+            // Command+X for macOS (BT profile 0), Ctrl+X for Windows
+            bindings = <&macro_tap>, (if (bt_active == 0)) <&kp LG(X)> else <&kp LC(X)>;
         };
 
         cp_paste: cp_paste {
-            label = "ZM_cp_paste";
+            label = "Cross-Platform Paste";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LG(V)>, <&macro_tap>, <&kp LC(V)>;
+
+            // Command+V for macOS (BT profile 0), Ctrl+V for Windows
+            bindings = <&macro_tap>, (if (bt_active == 0)) <&kp LG(V)> else <&kp LC(V)>;
         };
     };
 
@@ -117,12 +120,18 @@
 
         productivity_layer {
             bindings = <
-&trans  &trans  &trans     &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans     &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans     &trans    &trans     &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &cp_paste  &cp_copy  &cp_paste  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans     &trans    &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans     &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans     &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans     &trans    &trans     &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &cp_paste  &cp_copy  &cp_cut    &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans     &trans    &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
+    };
+
+    // Bluetooth profiles for macOS (profile 0) and Windows (profile 1+)
+    bt_profile {
+        compatible = "zmk,bt-profile";
+        bindings = <&bt BT_SEL 0>, <&bt BT_SEL 1>, <&bt BT_SEL 2>, <&bt BT_SEL 3>, <&bt BT_SEL 4>;
     };
 };
