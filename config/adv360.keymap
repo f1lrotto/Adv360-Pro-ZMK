@@ -26,37 +26,9 @@
 
         os_toggle: os_toggle {
             compatible = "zmk,behavior-tap-dance";
-            label = "OS_TOGGLE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&tog 6>, <&tog 6>;
-        };
-
-        os_copy: os_copy {
-            compatible = "zmk,behavior-mod-morph";
-            label = "OS_COPY";
-            #binding-cells = <0>;
-            bindings = <&win_copy>, <&mac_copy>;
-
-            mods = <(MOD_LALT|MOD_RALT)>;
-        };
-
-        os_cut: os_cut {
-            compatible = "zmk,behavior-mod-morph";
-            label = "OS_CUT";
-            #binding-cells = <0>;
-            bindings = <&win_cut>, <&mac_cut>;
-
-            mods = <(MOD_LALT|MOD_RALT)>;
-        };
-
-        os_paste: os_paste {
-            compatible = "zmk,behavior-mod-morph";
-            label = "OS_PASTE";
-            #binding-cells = <0>;
-            bindings = <&win_paste>, <&mac_paste>;
-
-            mods = <(MOD_LALT|MOD_RALT)>;
+            bindings = <&tog 0>, <&tog 0>;  // Toggle between 0 (macOS) and 1 (Windows)
         };
     };
 
@@ -75,46 +47,40 @@
     };
 
     macros {
-        mac_copy: mac_copy {
-            label = "ZM_mac_copy";
+        // Copy macro: Checks the toggle and sends macOS or Windows copy key combo
+        os_copy: os_copy {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LG(C)>;
+            bindings = <&macro_tap>;
+            macro_action = if (os_mode_toggle == 0) {
+                &kp LG(C);  // macOS copy
+            } else {
+                &kp LC(C);  // Windows copy
+            };
         };
-
-        mac_cut: mac_cut {
-            label = "ZM_mac_cut";
+        
+        // Cut macro
+        os_cut: os_cut {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LG(X)>;
+            bindings = <&macro_tap>;
+            macro_action = if (os_mode_toggle == 0) {
+                &kp LG(X);  // macOS cut
+            } else {
+                &kp LC(X);  // Windows cut
+            };
         };
-
-        mac_paste: mac_paste {
-            label = "ZM_mac_paste";
+        
+        // Paste macro
+        os_paste: os_paste {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LG(V)>;
-        };
-
-        win_copy: win_copy {
-            label = "ZM_win_copy";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LC(C)>;
-        };
-
-        win_cut: win_cut {
-            label = "ZM_win_cut";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LC(X)>;
-        };
-
-        win_paste: win_paste {
-            label = "ZM_win_paste";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&macro_tap>, <&kp LC(V)>;
+            bindings = <&macro_tap>;
+            macro_action = if (os_mode_toggle == 0) {
+                &kp LG(V);  // macOS paste
+            } else {
+                &kp LC(V);  // Windows paste
+            };
         };
     };
 
@@ -178,15 +144,6 @@
 &trans  &trans  &trans   &trans    &trans     &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &os_cut  &os_copy  &os_paste  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans   &trans    &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        os_mode_layer {
-            bindings = <
-&none  &none  &none  &none  &none  &none  &none                                  &none  &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none  &none                                  &none  &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none  &none  &none  &none      &none  &none  &none  &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none                &none      &none                &none  &none  &none  &none  &none  &none
             >;
         };
     };
