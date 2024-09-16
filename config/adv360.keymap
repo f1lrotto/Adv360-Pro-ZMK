@@ -23,13 +23,6 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-
-        os_toggle: os_toggle {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&tog 0>, <&tog 0>;  // Toggle between 0 (macOS) and 1 (Windows)
-        };
     };
 
     combos {
@@ -47,40 +40,25 @@
     };
 
     macros {
-        // Copy macro: Checks the toggle and sends macOS or Windows copy key combo
-        os_copy: os_copy {
+        cp_copy: cp_copy {
+            label = "ZM_cp_copy";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>;
-            macro_action = if (os_mode_toggle == 0) {
-                &kp LG(C);  // macOS copy
-            } else {
-                &kp LC(C);  // Windows copy
-            };
+            bindings = <&macro_tap>, <&kp LG(C)>, <&macro_tap>, <&kp LC(C)>;
         };
-        
-        // Cut macro
-        os_cut: os_cut {
+
+        cp_cut: cp_cut {
+            label = "ZM_cp_cut";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>;
-            macro_action = if (os_mode_toggle == 0) {
-                &kp LG(X);  // macOS cut
-            } else {
-                &kp LC(X);  // Windows cut
-            };
+            bindings = <&macro_tap>, <&kp LG(X)>, <&macro_tap>, <&kp LC(X)>;
         };
-        
-        // Paste macro
-        os_paste: os_paste {
+
+        cp_paste: cp_paste {
+            label = "ZM_cp_paste";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap>;
-            macro_action = if (os_mode_toggle == 0) {
-                &kp LG(V);  // macOS paste
-            } else {
-                &kp LC(V);  // Windows paste
-            };
+            bindings = <&macro_tap>, <&kp LG(V)>, <&macro_tap>, <&kp LC(V)>;
         };
     };
 
@@ -120,7 +98,7 @@
         mod {
             bindings = <
 &none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none                                                  &trans                  &none  &none       &none       &none  &none  &none
-&none  &os_toggle 6  &none         &none         &none         &none         &bootloader                                            &bootloader             &none  &none       &none       &none  &none  &none
+&none  &none         &none         &none         &none         &none         &bootloader                                            &bootloader             &none  &none       &none       &none  &none  &none
 &none  &none         &none         &none         &none         &none         &none        &none  &none      &bt BT_CLR  &none       &rgb_ug RGB_MEFS_CMD 5  &none  &none       &none       &none  &none  &none
 &none  &none         &none         &none         &macro_ver    &none                             &none      &none                                           &none  &none       &none       &none  &none  &none
 &none  &none         &none         &none         &none                       &none        &none  &none      &none       &bl BL_TOG  &rgb_ug RGB_TOG                &bl BL_INC  &bl BL_DEC  &none  &none  &none
@@ -139,11 +117,11 @@
 
         productivity_layer {
             bindings = <
-&trans  &trans  &trans   &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans   &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans   &trans    &trans     &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &os_cut  &os_copy  &os_paste  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans   &trans    &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans     &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans     &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans     &trans    &trans     &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &cp_paste  &cp_copy  &cp_paste  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans     &trans    &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
