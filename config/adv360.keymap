@@ -36,6 +36,7 @@
             label = "OS_COPY";
             #binding-cells = <0>;
             bindings = <&win_copy>, <&mac_copy>;
+
             mods = <(MOD_LALT|MOD_RALT)>;
         };
 
@@ -44,6 +45,7 @@
             label = "OS_CUT";
             #binding-cells = <0>;
             bindings = <&win_cut>, <&mac_cut>;
+
             mods = <(MOD_LALT|MOD_RALT)>;
         };
 
@@ -52,6 +54,7 @@
             label = "OS_PASTE";
             #binding-cells = <0>;
             bindings = <&win_paste>, <&mac_paste>;
+
             mods = <(MOD_LALT|MOD_RALT)>;
         };
     };
@@ -75,42 +78,42 @@
             label = "ZM_mac_copy";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp LG(C)>;
+            bindings = <&macro_tap>, <&kp LG(C)>;
         };
 
         mac_cut: mac_cut {
             label = "ZM_mac_cut";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp LG(X)>;
+            bindings = <&macro_tap>, <&kp LG(X)>;
         };
 
         mac_paste: mac_paste {
             label = "ZM_mac_paste";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp LG(V)>;
+            bindings = <&macro_tap>, <&kp LG(V)>;
         };
 
         win_copy: win_copy {
             label = "ZM_win_copy";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp LC(C)>;
+            bindings = <&macro_tap>, <&kp LC(C)>;
         };
 
         win_cut: win_cut {
             label = "ZM_win_cut";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp LC(X)>;
+            bindings = <&macro_tap>, <&kp LC(X)>;
         };
 
         win_paste: win_paste {
             label = "ZM_win_paste";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp LC(V)>;
+            bindings = <&macro_tap>, <&kp LC(V)>;
         };
     };
 
@@ -150,7 +153,7 @@
         mod {
             bindings = <
 &none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none                                                  &trans                  &none  &none       &none       &none  &none  &none
-&none  &none         &none         &none         &none         &none         &bootloader                                            &bootloader             &none  &none       &none       &none  &none  &none
+&none  &os_toggle 6  &none         &none         &none         &none         &bootloader                                            &bootloader             &none  &none       &none       &none  &none  &none
 &none  &none         &none         &none         &none         &none         &none        &none  &none      &bt BT_CLR  &none       &rgb_ug RGB_MEFS_CMD 5  &none  &none       &none       &none  &none  &none
 &none  &none         &none         &none         &macro_ver    &none                             &none      &none                                           &none  &none       &none       &none  &none  &none
 &none  &none         &none         &none         &none                       &none        &none  &none      &none       &bl BL_TOG  &rgb_ug RGB_TOG                &bl BL_INC  &bl BL_DEC  &none  &none  &none
@@ -169,20 +172,20 @@
 
         productivity_layer {
             bindings = <
-&trans  &trans  &trans     &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans     &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans     &trans    &trans     &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &cp_paste  &cp_copy  &cp_paste  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans     &trans    &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans   &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans   &trans    &trans     &trans  &trans                                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans   &trans    &trans     &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &os_cut  &os_copy  &os_paste  &trans                  &trans      &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans   &trans    &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
+
         os_mode_layer {
             bindings = <
-                &none  &none  &none  &none  &none  &none  &none
-                &none  &none  &none  &none  &none  &none  &none
-                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
-                &none  &none  &none  &none  &none  &none                &none  &none                &none  &none  &none  &none  &none
-                &none  &none  &none  &none  &none         &none  &none  &none  &none  &none  &none         &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none                                  &none  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none                                  &none  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none  &none  &none      &none  &none  &none  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                &none      &none                &none  &none  &none  &none  &none  &none
             >;
         };
     };
