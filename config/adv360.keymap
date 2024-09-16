@@ -176,5 +176,14 @@
 &trans  &trans  &trans     &trans    &trans             &trans  &trans  &trans      &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
+        os_mode_layer {
+            bindings = <
+                &none  &none  &none  &none  &none  &none  &none
+                &none  &none  &none  &none  &none  &none  &none
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                &none  &none  &none  &none  &none  &none                &none  &none                &none  &none  &none  &none  &none
+                &none  &none  &none  &none  &none         &none  &none  &none  &none  &none  &none         &none  &none  &none  &none  &none
+            >;
+        };
     };
 };
